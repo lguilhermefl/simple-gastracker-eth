@@ -15,6 +15,19 @@ export default function App() {
     });
 
     useEffect(() => {
+        axios
+            .get(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${process.env.ETH_API_KEY}`)
+            .then(({ data }) => {
+                console.log(data.result);
+                setGasPrice({
+                    low: data.result.SafeGasPrice,
+                    average: data.result.ProposeGasPrice,
+                    fast: data.result.FastGasPrice
+                })
+            })
+    }, []);
+
+    useEffect(() => {
         setInterval(() => {
             axios
                 .get(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${process.env.ETH_API_KEY}`)
