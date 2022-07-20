@@ -17,7 +17,7 @@ export default function App() {
     useEffect(() => {
         setInterval(() => {
             axios
-                .get("https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=S9VYAZJRTM537IYCU8RTZ94CB11DT3XFFE")
+                .get(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${process.env.ETH_API_KEY}`)
                 .then(({ data }) => {
                     console.log(data.result);
                     setGasPrice({
